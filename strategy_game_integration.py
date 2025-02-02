@@ -1,7 +1,7 @@
 import streamlit as st
 import random
 
-st.title("Supply Chain Integration Game - 6 Players 🏭")
+st.title("Value Chain Integration Game - 6 Players 🏭")
 
 # Initialize game state
 if 'game_state' not in st.session_state:
@@ -23,7 +23,7 @@ if 'game_state' not in st.session_state:
         'current_player_index': 0
     }
     st.session_state.prices = {facility: random.randint(400, 800) for facility in st.session_state.game_state['players']['Player 1']['facilities']}
-    st.session_state.rental_prices = {facility: price // 5 for facility, price in st.session_state.prices.items()}
+    st.session_state.rental_prices = {facility: price // 6 for facility, price in st.session_state.prices.items()}
 
 # Get current player
 current_player = f"Player {st.session_state.game_state['current_player_index'] + 1}"
