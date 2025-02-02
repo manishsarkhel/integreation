@@ -18,7 +18,7 @@ if 'game_state' not in st.session_state:
                 }
             } for i in range(6)
         },
-        'monthly_income': 100,
+        'monthly_income': 200,
         'months': 0,
         'current_player_index': 0
     }
