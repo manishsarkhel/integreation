@@ -8,7 +8,7 @@ if 'game_state' not in st.session_state:
     st.session_state.game_state = {
         'players': {
             f'Player {i+1}': {
-                'money': 500,
+                'money': 1000,
                 'facilities': {
                     "Supplier 📦": {'owned': False, 'rented': False},
                     "Warehouse 🏪": {'owned': False, 'rented': False},
@@ -22,8 +22,8 @@ if 'game_state' not in st.session_state:
         'months': 0,
         'current_player_index': 0
     }
-    st.session_state.prices = {facility: random.randint(200, 400) for facility in st.session_state.game_state['players']['Player 1']['facilities']}
-    st.session_state.rental_prices = {facility: price // 4 for facility, price in st.session_state.prices.items()}
+    st.session_state.prices = {facility: random.randint(400, 800) for facility in st.session_state.game_state['players']['Player 1']['facilities']}
+    st.session_state.rental_prices = {facility: price // 5 for facility, price in st.session_state.prices.items()}
 
 # Get current player
 current_player = f"Player {st.session_state.game_state['current_player_index'] + 1}"
@@ -97,7 +97,7 @@ if st.button("End Turn ⏭️"):
     rented_facilities = sum(1 for f in st.session_state.game_state['players'][current_player]['facilities'].values() if f['rented'])
 
     owned_income = owned_facilities * st.session_state.game_state['monthly_income']
-    rental_income = rented_facilities * (st.session_state.game_state['monthly_income'] // 2)
+    rental_income = rented_facilities * (st.session_state.game_state['monthly_income'] // 1.67)
     total_income = owned_income + rental_income
     rental_costs = sum(st.session_state.rental_prices[f] for f, status in st.session_state.game_state['players'][current_player]['facilities'].items() if status['rented'])
 
