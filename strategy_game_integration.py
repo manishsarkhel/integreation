@@ -53,7 +53,7 @@ for facility, status in st.session_state.game_state['players'][current_player]['
                         st.session_state.game_state['players'][current_player]['money'] -= st.session_state.rental_prices[facility]
                         st.session_state.game_state['players'][current_player]['facilities'][facility]['rented'] = True
                         st.success(f"Successfully rented {facility}!")
-                        st.experimental_rerun()
+                        st.rerun()
                     else:
                         st.error("Not enough money!")
             else:
@@ -63,7 +63,7 @@ for facility, status in st.session_state.game_state['players'][current_player]['
                         st.session_state.game_state['players'][current_player]['facilities'][facility]['owned'] = True
                         st.session_state.game_state['players'][current_player]['facilities'][facility]['rented'] = False
                         st.success(f"Successfully purchased {facility}!")
-                        st.experimental_rerun()
+                        st.rerun()
                     else:
                         st.error("Not enough money!")
 
@@ -74,7 +74,7 @@ for facility, status in st.session_state.game_state['players'][current_player]['
                         st.session_state.game_state['players'][current_player]['money'] -= st.session_state.prices[facility]
                         st.session_state.game_state['players'][current_player]['facilities'][facility]['owned'] = True
                         st.success(f"Successfully purchased {facility}!")
-                        st.experimental_rerun()
+                        st.rerun()
                     else:
                         st.error("Not enough money!")
 
@@ -84,11 +84,11 @@ for facility, status in st.session_state.game_state['players'][current_player]['
                     st.session_state.game_state['players'][current_player]['money'] += st.session_state.prices[facility] // 2
                     st.session_state.game_state['players'][current_player]['facilities'][facility]['owned'] = False
                     st.success(f"Successfully sold {facility}!")
-                    st.experimental_rerun()
+                    st.rerun()
             elif status['rented']:
                 if st.button(f"Stop Renting", key=f"stop_renting_{facility}"):
                     st.session_state.game_state['players'][current_player]['facilities'][facility]['rented'] = False
-                    st.experimental_rerun()
+                    st.rerun()
 
 # End Turn button
 if st.button("End Turn ⏭️"):
@@ -117,7 +117,7 @@ if st.button("End Turn ⏭️"):
     Rental costs: -${rental_costs}
     Net income: ${total_income - rental_costs}
     """)
-    st.experimental_rerun()
+    st.rerun()
 
 # Check for winners
 winners = []
@@ -130,7 +130,7 @@ if winners:
     st.success(f"🎉 Congratulations! {', '.join(winners)} have built complete supply chains!")
     if st.button("Play Again 🔄"):
         del st.session_state.game_state
-        st.experimental_rerun()
+        st.rerun()
 
 # Check for eliminated players
 eliminated = []
@@ -143,4 +143,4 @@ if eliminated:
     if len(eliminated) == 6:  # All players eliminated
         if st.button("Start New Game 🔄"):
             del st.session_state.game_state
-            st.experimental_rerun()
+            st.rerun()
